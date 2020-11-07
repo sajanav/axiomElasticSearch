@@ -1,0 +1,101 @@
+{
+	"settings": {
+            "index": {
+                "number_of_shards": "3",
+                
+                "analysis": {
+                    "filter": {
+                        "filter_stop": {
+                            "type": "stop"
+                        }
+                    },
+                    "analyzer": {
+                        "my_analyzer": {
+                            "filter": [
+                                "lowercase"
+                            ],
+                            "tokenizer": "my_tokenizer_1"
+                        },
+                        "my_analyzer_1":{
+                            "filter" : [
+                                "lowercase",
+                                "filter_stop"
+                            ],
+                            "tokenizer" : "my_tokenizer"
+                        },
+                        "my_analyzer_2" : {
+                            "tokenizer" : "lowercase"
+                        }
+
+                    },
+                    "tokenizer": {
+                        "my_tokenizer": {
+                            "token_chars": [
+                                "letter",
+                                "digit"
+                            ],
+                            "min_gram": "2",
+                            "type": "edge_ngram",
+                            "max_gram": "20"
+                        },
+                        "my_tokenizer_1": {
+                            "type" : "edge_ngram",
+                            "min_gram" : 2,
+                            "max_gram" : 20,
+                            "token_chars" : [
+                                "letter"
+                            ]
+                        }
+                    }
+                },
+                "number_of_replicas": "2"
+            }
+        },
+        "mappings": {
+            
+                "dynamic": "true",
+                "properties": {
+                "release": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "priceEur": {
+                    "type": "int"
+                },
+                "announceDate": {
+                    "type": "text"
+                },
+                "audioJack": {
+                    "type": "keyword"
+                },
+               
+                "picture": {
+                    "type" : "keyword"
+                },
+                "gps": {
+                    "type": "text",
+                    "analyzer" : "my_analyzer_1",
+                    "search_analyzer" : "my_analyzer_2"
+                },
+                "battery": {
+                    "type": "text",
+                    "analyzer" : "my_analyzer",
+                    "search_analyzer" : "my_analyzer_2"
+                },
+                "sim": {
+                    "type": "text",
+                },
+                "resolution": {
+                    "type": "text",
+                },
+                "id": {
+                    "type": "long"
+                }
+            }
+    }
+}
