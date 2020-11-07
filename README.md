@@ -23,9 +23,7 @@ To test the APIs head to Postman:
  
     1) To get all data from the ElasticSearch Index , send a GET request to the URL : http://127.0.0.1:8181/example
     2) To query a particular string , send a GET request to the URL : http://127.0.0.1:8181/search/{searchString}
-    Examples:
-        1) GET to http://127.0.0.1:8181/search/CEO 
-        2) GET to http://127.0.0.1:8181/search/ELVA 
+
       
 
 ### Reference Documentation
